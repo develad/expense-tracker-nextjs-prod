@@ -40,6 +40,11 @@ const addTransaction = async (
     return { error: 'User not found' };
   }
 
+  //   const transactionData: TransactionData = {
+  //     text,
+  //     amount,
+  //   };
+
   try {
     const transactionData: TransactionData = await db.transaction.create({
       data: {

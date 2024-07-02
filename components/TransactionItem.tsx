@@ -4,7 +4,7 @@ import { Transaction } from '@/types/Transaction';
 import { addCommas } from '@/lib/utils';
 import { toast } from 'react-toastify';
 import { deleteTransaction } from '@/app/actions/deleteTransaction';
-import { changeTransactionSign } from '@/app/actions/changeTransactionSign';
+import { changeTansactionSign } from '@/app/actions/changeTansactionSign';
 import { SVGProps } from 'react';
 
 export function TwemojiPlus(props: SVGProps<SVGSVGElement>) {
@@ -56,7 +56,7 @@ const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
   };
 
   const handleSignToggle = async (transactionId: string) => {
-    const { message, error } = await changeTransactionSign(transactionId);
+    const { message, error } = await changeTansactionSign(transactionId);
     if (error) {
       toast.error('error');
     }
