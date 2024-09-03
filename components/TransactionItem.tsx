@@ -1,11 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import { Transaction } from '@/types/Transaction';
 import { addCommas } from '@/lib/utils';
 import { toast } from 'react-toastify';
-import { deleteTransaction } from '@/app/actions/deleteTransaction';
-import { changeTansactionSign } from '@/app/actions/changeTansactionSign';
+import { changeTransactionSign } from '@/app/actions/changeTansactionSign';
 import { SVGProps } from 'react';
+
+import Modal from '@/components/Modal';
+
+import { motion } from 'framer-motion';
 
 export function TwemojiPlus(props: SVGProps<SVGSVGElement>) {
   return (
@@ -38,25 +42,12 @@ export function TwemojiMinus(props: SVGProps<SVGSVGElement>) {
 }
 
 const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const sign = transaction.amount < 0 ? '-' : '+';
 
-  const handleDeleteTransaction = async (transactionId: string) => {
-    const confirmed = window.confirm(
-      'Are you sure you want to delete this transaction?'
-    );
-
-    if (!confirmed) return;
-
-    const { message, error } = await deleteTransaction(transactionId);
-
-    if (error) {
-      toast.error(error);
-    }
-    toast.success(message);
-  };
-
   const handleSignToggle = async (transactionId: string) => {
-    const { message, error } = await changeTansactionSign(transactionId);
+    const { message, error } = await changeTransactionSign(transactionId);
     if (error) {
       toast.error('error');
     }
@@ -66,46 +57,72 @@ const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
     }
   };
 
+  if (isModalOpen) {
+    return (
+      <Modal
+        setModalOpen={setModalOpen}
+        isModalOpen={isModalOpen}
+        transaction={transaction}
+      />
+    );
+  }
+
   return (
-    <li
-      className={transaction.amount < 0 ? 'minus note' : 'plus note'}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        justifyItems: 'center',
-      }}
-    >
-      <span style={{ marginRight: 'auto' }}>{transaction.text}</span>
-      <button
-        onClick={() => handleSignToggle(transaction.id)}
+    !isModalOpen && (
+      <motion.li
+        layout
+        // viewport={{ once: true }}
+        // key={transaction.id}
+        // initial={{ opacity: 1, x: 0 }}
+        // animate={{ opacity: 1, x: 0 }}
+        // transition={{
+        //   ease: 'backInOut',
+        //   duration: 0.4,
+        // }}
+        // exit={{ opacity: 0, x: 25 }}
+        className={transaction.amount < 0 ? 'minus note' : 'plus note'}
         style={{
-          background: 'transparent',
-          border: '1px solid #ccc',
-          borderRadius: '15px',
-          cursor: 'pointer',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          justifyItems: 'center',
         }}
       >
-        <TwemojiPlus
-          width={16}
-          height={16}
-          style={{ marginRight: '0.5rem' }}
-        />
-        <TwemojiMinus
-          width={16}
-          height={16}
-        />
-      </button>
-      <span style={{ marginLeft: 'auto' }}>
-        {sign}${addCommas(Math.abs(transaction.amount))}
-      </span>
+        <span style={{ marginRight: 'auto' }}>{transaction.text}</span>
+        <button
+          onClick={() => handleSignToggle(transaction.id)}
+          style={{
+            background: 'transparent',
+            border: '1px solid #ccc',
+            borderRadius: '15px',
+            cursor: 'pointer',
+          }}
+        >
+          <TwemojiPlus
+            width={16}
+            height={16}
+            style={{ marginRight: '0.5rem' }}
+          />
+          <TwemojiMinus
+            width={16}
+            height={16}
+          />
+        </button>
+        <span style={{ marginLeft: 'auto' }}>
+          {sign}${addCommas(Math.abs(transaction.amount))}
+        </span>
 
-      <button
-        className="delete-btn"
-        onClick={() => handleDeleteTransaction(transaction.id)}
-      >
-        x
-      </button>
-    </li>
+        <button
+          className="delete-btn"
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          x
+        </button>
+      </motion.li>
+    )
+
+    // {/* </AnimatePresence> */}
   );
 };
 

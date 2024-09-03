@@ -11,7 +11,7 @@ type TransactionSign = {
   message?: string;
 };
 
-const changeTansactionSign = async (id: string): Promise<TransactionSign> => {
+const changeTransactionSign = async (id: string): Promise<TransactionSign> => {
   const { userId } = auth();
 
   if (!userId) {
@@ -42,7 +42,7 @@ const changeTansactionSign = async (id: string): Promise<TransactionSign> => {
     revalidatePath('/');
 
     return {
-      message: `Update ${updatedTransaction.text} successfully as an  ${
+      message: `Update ${updatedTransaction.text} successfully as an ${
         updatedTransaction.amount < 0 ? 'expense (-)' : 'income (+)'
       }`,
     };
@@ -53,4 +53,4 @@ const changeTansactionSign = async (id: string): Promise<TransactionSign> => {
   }
 };
 
-export { changeTansactionSign };
+export { changeTransactionSign };

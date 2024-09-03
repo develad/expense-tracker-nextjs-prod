@@ -272,6 +272,15 @@ input[type='number'] {
   text-align: center;
 }
 
+.btn-box {
+  flex-direction: column;
+}
+
+.btn-box > .btn {
+  width: calc(100% - 100px);
+  margin: 0.3rem;
+}
+
 @media only screen and (max-width: 900px) {
   h3 {
     margin: 20px 0 10px;
@@ -309,5 +318,10 @@ input[type='number'] {
 
   .welcome-guest {
     margin-top: -30px;
+  }
+
+  .btn-box > .btn .guest {
+    width: 100%;
+    margin: 10px auto;
   }
 }

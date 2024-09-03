@@ -12,6 +12,13 @@ const poppins = Poppins({ weight: '400', subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Expense Tracker',
   description: 'Track your expenses and create a budget',
+  openGraph: {
+    images: 'image_02.png',
+  },
+  icons: {
+    icon: 'favicon-32x32.png',
+    apple: 'apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
