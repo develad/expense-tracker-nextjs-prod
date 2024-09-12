@@ -102,7 +102,7 @@ const Guest = () => {
           className="guest button"
           style={{ margin: '1rem auto' }}
         >
-          <SignInButton />
+          <SignInButton mode="modal" />
         </div>
       </div>
     </div>
