@@ -1,0 +1,9 @@
+ npm i -D prisma
+
+ npx prisma init
+
+ // Need to run this command every time the 'schema.prisma' file change
+ npx prisma generate
+
+ // Sync database with your schema, Need to give the migration a name
+ npx prisma migrate dev

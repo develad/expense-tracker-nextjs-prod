@@ -1,0 +1,382 @@
+:root {
+  /* Common variables */
+  /* --toastify-font-family: monospace;
+  --toastify-z-index: 9999; */
+
+  /* Light theme (default) */
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --bg: #f7f7f7;
+  --body: #f7f7f7;
+  --nav: #000;
+  --text: #000;
+  --list-li: #333;
+  --card-bg: #fff;
+  --border-color: #dedede;
+  --shadow-color: #cacaca;
+
+  /* Money colors */
+  --money-plus: #2ecc71;
+  --money-minus: #c0392b;
+
+  /* Button colors */
+  --btn-primary: rgb(51, 153, 88);
+  --btn-secondary: #9c88ff;
+  --btn-danger: #e74c3c;
+  --btn-text: #fff;
+}
+
+.dark {
+  /* Dark theme */
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --bg: #1f1f1f;
+  --body: #000;
+  --nav: #333;
+  --text: #fff;
+  --list-li: #fff;
+  --card-bg: #2d2d2d;
+  --border-color: #404040;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+
+  /* Money colors remain the same for consistency */
+  --money-plus: #2ecc71;
+  --money-minus: #c0392b;
+
+  /* Button colors - slightly adjusted for dark mode */
+  --btn-primary: rgb(51, 153, 88);
+  --btn-secondary: #7b6cd9;
+  --btn-danger: #c0392b;
+  --btn-text: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--body);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: var(--text);
+}
+
+footer {
+  width: 100%;
+}
+
+footer > div {
+  max-width: 180px;
+  margin: 0 auto;
+  padding: 0.1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container {
+  margin: 30px auto;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar {
+  background: var(--nav);
+  color: white;
+}
+
+.navbar a {
+  color: white;
+}
+
+.navbar button,
+.guest button {
+  border: 0;
+  border-radius: 5px;
+  background: var(--btn-primary);
+  color: var(--btn-text);
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.guest button {
+  width: 100%;
+}
+
+.navbar button:hover {
+  opacity: 0.9;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.navbar .cl-button {
+  background: transparent;
+  border: 0;
+}
+
+h1 {
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+h3 {
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 10px;
+  margin: 40px 0 10px;
+}
+
+h4 {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.guest {
+  text-align: center;
+  width: 30vw;
+}
+
+.error {
+  background: red;
+  color: #fff;
+  padding: 3px;
+}
+
+.inc-exp-container {
+  background-color: var(--card-bg);
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.inc-exp-container > div {
+  flex: 1;
+  text-align: center;
+}
+
+.inc-exp-container > div:first-of-type {
+  border-right: 1px solid var(--border-color);
+}
+
+.money {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 5px 0;
+}
+
+.money.plus {
+  color: var(--money-plus);
+}
+
+.money.minus {
+  color: var(--money-minus);
+}
+
+label {
+  display: inline-block;
+  margin: 10px 0;
+}
+
+input[type='text'],
+input[type='number'] {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  display: block;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+.btn {
+  cursor: pointer;
+  background-color: var(--btn-secondary);
+  box-shadow: var(--box-shadow);
+  color: var(--btn-text);
+  border: 0;
+  display: block;
+  font-size: 16px;
+  margin: 20px 0 30px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 25px;
+  font-family: inherit;
+}
+
+.btn:focus,
+.delete-btn:focus {
+  outline: 0;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.list li {
+  background-color: var(--card-bg);
+  box-shadow: var(--box-shadow);
+  color: var(--list-li);
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.list li.plus {
+  border-right: 5px solid var(--money-plus);
+}
+
+.list li.minus {
+  border-right: 5px solid var(--money-minus);
+}
+
+.delete-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: var(--btn-danger);
+  border: 0;
+  color: var(--btn-text);
+  font-size: 20px;
+  padding: 2px;
+  padding-bottom: 4px;
+  position: absolute;
+  top: 50%;
+  left: -4px;
+  transform: translate(-100%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+.list li:hover .delete-btn {
+  opacity: 1;
+}
+
+.note {
+  background-color: var(--card-bg);
+  padding: 10px 20px;
+  box-shadow: 5px 4px 15px var(--shadow-color);
+  border-radius: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  width: 80vw;
+}
+
+.grid-container-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  width: calc(100vw - 40px);
+  max-width: 1200px;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.grad-plus {
+  background: linear-gradient(135deg, var(--card-bg) 70%, #25ff8060);
+}
+.grad-minus {
+  background: linear-gradient(135deg, var(--card-bg) 70%, #ff372560);
+}
+
+.grid-image {
+  border-radius: 20px;
+  box-shadow: 5px 4px 15px var(--shadow-color);
+  object-fit: cover;
+  transform: rotateZ(-2deg);
+  border: 8px solid white;
+  width: 100%;
+  height: 100%;
+}
+
+.welcome-guest {
+  place-self: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+.btn-box {
+  flex-direction: column;
+}
+
+.btn-box > .btn {
+  width: calc(100% - 100px);
+  margin: 0.3rem;
+}
+
+/* Add these styles */
+#themeToggle {
+  all: unset;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 900px) {
+  h3 {
+    margin: 20px 0 10px;
+  }
+
+  .navbar-container {
+    padding: 0 2.5rem;
+  }
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .grid-container-2 {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    grid-column-start: 1;
+    margin-top: 1rem;
+  }
+
+  .grid-image {
+    border-radius: 20px;
+    box-shadow: 5px 4px 15px var(--shadow-color);
+    object-fit: cover;
+    transform: rotateZ(-2deg);
+    border: 8px solid white;
+    width: calc(100% - 20px);
+    height: 100%;
+  }
+
+  .guest {
+    text-align: center;
+    width: 80vw;
+  }
+
+  .welcome-guest {
+    margin-top: -30px;
+  }
+
+  .btn-box > .btn .guest {
+    width: 100%;
+    margin: 10px auto;
+  }
+}
